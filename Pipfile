@@ -6,6 +6,8 @@ name = "pypi"
 [dev-packages]
 
 [packages]
+networkx = "*"
+matplotlib = "*"
 
 [requires]
 python_version = "3.6"
