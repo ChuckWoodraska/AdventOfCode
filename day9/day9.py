@@ -26,6 +26,9 @@ def main():
         players, last_marble = re.match('(\d+)\D*(\d+)', data).groups()
         players = int(players)
         # PART 1
+        last_marble = int(last_marble)
+        print(play_game(players, last_marble))
+        # PART 2
         last_marble = int(last_marble) * 100
         print(play_game(players, last_marble))
 
