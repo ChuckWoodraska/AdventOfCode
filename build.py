@@ -1,6 +1,6 @@
 import os
 
-for i in range(26):
+for i in range(1, 26):
     path = os.path.dirname(__file__)
     dir_path = os.path.join(path, 'day{}'.format(i))
     os.mkdir(dir_path)
