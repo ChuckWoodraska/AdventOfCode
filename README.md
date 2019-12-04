@@ -1,2 +1,2 @@
-# AdventOfCode2018
-Repo for Advent of Code 2018
+# AdventOfCode
+Repo for Advent of Code solutions
