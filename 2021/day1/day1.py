@@ -1,7 +1,3 @@
-import itertools
-from functools import reduce
-import operator
-
 # PART 1
 with open("input.txt", "r") as f:
     num_list = [int(x) for x in f.read().splitlines()]
