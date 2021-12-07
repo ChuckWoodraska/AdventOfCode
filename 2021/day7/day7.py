@@ -6,20 +6,10 @@ with open("input.txt", "r") as f:
     fuel_min = 100000000
     for position in range(crab_min, crab_max+1):
         fuel_total = 0
-        print(position)
-        print(fuel_min)
         for crab in crab_list:
             if fuel_total >= fuel_min:
                 break
-            while crab != position:
-                if crab > position:
-                    crab -= 1
-                    fuel_total += 1
-                else:
-                    crab += 1
-                    fuel_total += 1
-                if fuel_total >= fuel_min:
-                    break
+            fuel_total += abs(crab - position)
         if fuel_total < fuel_min:
             fuel_min = fuel_total
 print(fuel_min)
@@ -32,22 +22,10 @@ with open("input.txt", "r") as f:
     fuel_min = 10000000000
     for position in range(crab_min, crab_max+1):
         fuel_total = 0
-        print(position)
-        print(fuel_min)
         for crab in crab_list:
             if fuel_total >= fuel_min:
                 break
-            counter = 1
-            while crab != position:
-                if crab > position:
-                    crab -= 1
-                    fuel_total += counter
-                else:
-                    crab += 1
-                    fuel_total += counter
-                if fuel_total >= fuel_min:
-                    break
-                counter += 1
+            fuel_total += abs(crab - position) * (abs(crab - position) + 1) // 2
         if fuel_total < fuel_min:
             fuel_min = fuel_total
 print(fuel_min)
