@@ -5,7 +5,7 @@ def fuel(line):
 def main():
     total = 0
     with open('input.txt', 'r') as f:
-        for line in f.readlines():
+        for line in f:
             total += fuel(int(line))
     print(total)
 
@@ -13,7 +13,7 @@ def main():
 def main2():
     total2 = 0
     with open('input.txt', 'r') as f:
-        for line in f.readlines():
+        for line in f:
             temp = fuel(int(line))
             while temp > 0:
                 total2 += temp

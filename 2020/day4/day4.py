@@ -51,12 +51,14 @@ for p in passports:
             try:
                 hgt_type = v[-2:]
                 hgt_value = int(v[:-2])
-                if hgt_type == 'in':
-                    if 76 >= hgt_value >= 59:
-                        flags[k] += 1
-                elif hgt_type == 'cm':
-                    if 193 >= hgt_value >= 150:
-                        flags[k] += 1
+                if (
+                    hgt_type == 'cm'
+                    and 193 >= hgt_value >= 150
+                    or hgt_type != 'cm'
+                    and hgt_type == 'in'
+                    and 76 >= hgt_value >= 59
+                ):
+                    flags[k] += 1
             except:
                 pass
         elif k == 'hcl':

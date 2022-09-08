@@ -1,7 +1,6 @@
 import pandas as pd
 
-grid_list = [[0 for y in range(301)] for x in
-             range(301)]
+grid_list = [[0 for _ in range(301)] for _ in range(301)]
 
 grid_dict = {}
 
@@ -20,7 +19,7 @@ with open('input.txt', 'r') as f:
     for x in range(1, 301):
         for y in range(1, 301):
             grid_list[y][x] = calculate_power_level(x, y, data)
-            grid_dict['{}{}'.format(y, x)] = calculate_power_level(x, y, data)
+            grid_dict[f'{y}{x}'] = calculate_power_level(x, y, data)
     max_power = [0, 0, 0]
     for size in range(3, 301):
         print(size)
@@ -29,8 +28,8 @@ with open('input.txt', 'r') as f:
                 total = 0
                 for i in range(size):
                     for j in range(size):
-                        total += grid_dict['{}{}'.format(y+i, x+j)]
-                        # total += grid_list[y+i][x+j]
+                        total += grid_dict[f'{y + i}{x + j}']
+                                            # total += grid_list[y+i][x+j]
                 if total > max_power[0]:
                     max_power[0] = total
                     max_power[1] = (x, y)

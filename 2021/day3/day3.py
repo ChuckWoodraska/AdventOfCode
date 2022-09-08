@@ -1,69 +1,49 @@
 import math
 # PART 1
 with open("input.txt", "r") as f:
-    byte_list = [x for x in f.read().splitlines()]
-    b_list = [0 for x in range(len(byte_list[0]))]
-    final = ''
+    byte_list = list(f.read().splitlines())
+    b_list = [0 for _ in range(len(byte_list[0]))]
     for byte in byte_list:
         for index,b in enumerate(byte):
             b_list[index] += int(b)
-    for b in b_list:
-        if int(b) > int(len(byte_list)/2):
-            final += '1'
-        else:
-            final += '0'
+    final = ''.join('1' if int(b) > len(byte_list) // 2 else '0' for b in b_list)
     gr = int(final, 2)
-    er = ''
-    for c in final:
-        if c == '1':
-            er += '0'
-        else:
-            er += '1'
+    er = ''.join('0' if c == '1' else '1' for c in final)
     er = int(er, 2)
 print(gr*er)
 
 # # PART 2
 with open("input.txt", "r") as f:
-    byte_list = [x for x in f.read().splitlines()]
+    byte_list = list(f.read().splitlines())
     new_list = byte_list
     for index in range(len(byte_list[0])):
-        temp_list = []
-        b_list = [0 for x in range(len(byte_list[0]))]
-        f = ''
+        b_list = [0 for _ in range(len(byte_list[0]))]
         for byte in new_list:
             for i, b in enumerate(byte):
                 b_list[i] += int(b)
-        for b in b_list:
-            if int(b) >= int(math.ceil(len(new_list) / 2)):
-                f += '1'
-            else:
-                f += '0'
-        for x in new_list:
-            if x[index] == f[index]:
-                temp_list.append(x)
-        b_list = [0 for x in range(len(new_list[0]))]
+        f = ''.join(
+            '1' if int(b) >= int(math.ceil(len(new_list) / 2)) else '0'
+            for b in b_list
+        )
+
+        temp_list = [x for x in new_list if x[index] == f[index]]
+        b_list = [0 for _ in range(len(new_list[0]))]
         new_list = temp_list
     ogr = int(new_list[0], 2)
 
     new_list = byte_list
     for index in range(len(byte_list[0])):
-        temp_list = []
-        b_list = [0 for x in range(len(byte_list[0]))]
-        f = ''
+        b_list = [0 for _ in range(len(byte_list[0]))]
         for byte in new_list:
             for i, b in enumerate(byte):
                 b_list[i] += int(b)
-        for b in b_list:
-            if int(b) >= int(math.ceil(len(new_list) / 2)):
-                f += '0'
-            else:
-                f += '1'
+        f = ''.join(
+            '0' if int(b) >= int(math.ceil(len(new_list) / 2)) else '1'
+            for b in b_list
+        )
 
-        for x in new_list:
-            if x[index] == f[index]:
-                temp_list.append(x)
-
-        b_list = [0 for x in range(len(new_list[0]))]
+        temp_list = [x for x in new_list if x[index] == f[index]]
+        b_list = [0 for _ in range(len(new_list[0]))]
         new_list = temp_list
         if len(new_list) == 1:
             break

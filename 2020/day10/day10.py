@@ -21,7 +21,7 @@ while index != len(lines)-1:
     next_num = lines[index] + 1
     if next_num in lines:
         temp_list.append(lines[index])
-    elif next_num not in lines:
+    else:
         if len(temp_list) > 1:
             unique_combos = unique_combos * (pow(2, len(temp_list) - 1) - max((len(temp_list) - 3), 0))
         temp_list = []

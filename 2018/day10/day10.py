@@ -14,7 +14,7 @@ class Star:
         self.y += self.dy
 
     def __repr__(self):
-        return 'x={} y={}'.format(self.x, self.y)
+        return f'x={self.x} y={self.y}'
 
 
 stars = []
@@ -27,7 +27,7 @@ def make_grid(grid_min, s):
     max_y = max(stars, key=lambda star: star.y).y
     # print(min_x, max_x, min_y, max_y)
     if s == 10144:
-        star_list = [['.' for y in range(max_y + 1)] for x in range(max_x + 1)]
+        star_list = [['.' for _ in range(max_y + 1)] for _ in range(max_x + 1)]
         for star in stars:
             star_list[star.x][star.y] = '#'
         for row in range(len(star_list) - 1, 0, -1):

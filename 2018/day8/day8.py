@@ -1,9 +1,9 @@
 def count_meta(node, total):
     child_nodes = node.pop(0)
     meta_nodes = node.pop(0)
-    for child in range(child_nodes):
+    for _ in range(child_nodes):
         total = count_meta(node, total)
-    for meta in range(meta_nodes):
+    for _ in range(meta_nodes):
         total += node.pop(0)
     return total
 
@@ -14,11 +14,11 @@ def count_meta2(node, total, lookup, _id):
         lookup[child] = count_meta2(node, total, {}, child)
     mid_total = 0
     if child_nodes:
-        for meta in range(meta_nodes):
+        for _ in range(meta_nodes):
             meta_index = node.pop(0)
             mid_total += lookup.get(meta_index, 0)
     else:
-        for meta in range(meta_nodes):
+        for _ in range(meta_nodes):
             meta_index = node.pop(0)
             mid_total += meta_index
     return mid_total

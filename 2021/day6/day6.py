@@ -1,8 +1,7 @@
 # PART 1
 with open("input.txt", "r") as f:
     fish_list = [int(x) for x in f.read().split(',')]
-    counter = 0
-    while counter < 80:
+    for _ in range(80):
         new_fish = fish_list
         for index, f in enumerate(fish_list):
             f -= 1
@@ -12,7 +11,6 @@ with open("input.txt", "r") as f:
             else:
                 new_fish[index] = f
         fish_list = new_fish
-        counter += 1
 print(len(fish_list))
 
 # PART 2
@@ -22,7 +20,7 @@ with open("input.txt", "r") as f:
     for fish in fish_list:
         fish_dict[fish] += 1
 
-    for gen in range(256):
+    for _ in range(256):
         new_fish = fish_dict[0]
         fish_dict[7] += fish_dict[0]
         for interval in range(1, 9):
