@@ -1,15 +1,11 @@
 def check_columns(board):
-    for c in range(5):
-        if [list(r.values())[c] for r in board].count(True) == 5:
-            return True
-    return False
+    return any(
+        [list(r.values())[c] for r in board].count(True) == 5 for c in range(5)
+    )
 
 
 def check_rows(board):
-    for row in board:
-        if list(row.values()).count(True) == 5:
-            return True
-    return False
+    return any(list(row.values()).count(True) == 5 for row in board)
 
 
 def check_board(board):
@@ -17,7 +13,9 @@ def check_board(board):
 
 
 def get_score(num, board):
-    return sum([int(k) for row in board for k, v in row.items() if v is False]) * int(num)
+    return sum(
+        int(k) for row in board for k, v in row.items() if v is False
+    ) * int(num)
 
 
 def mark_number(num, board):
@@ -30,7 +28,7 @@ def main():
     with open("input.txt", "r") as f:
         all_boards = []
         data = [line.strip() for line in f.readlines()]
-        numbers = [x for x in data.pop(0).split(",")]
+        numbers = list(data.pop(0).split(","))
         data.pop(0)
         board = []
         board_win_track = []

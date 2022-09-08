@@ -2,9 +2,7 @@ from string import ascii_lowercase
 
 
 def check_pair(a, b):
-    if ord(a) - 32 == ord(b) or ord(a) + 32 == ord(b):
-        return True
-    return False
+    return ord(a) - 32 == ord(b) or ord(a) + 32 == ord(b)
 
 
 def react(polymer):

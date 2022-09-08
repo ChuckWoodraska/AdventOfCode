@@ -1,9 +1,7 @@
 # PART 1
 with open('input.txt', 'r') as f:
     data = f.read()
-    total = 0
-    for line in data.splitlines():
-        total += int(line)
+    total = sum(int(line) for line in data.splitlines())
     print(total)
 
 # PART 2

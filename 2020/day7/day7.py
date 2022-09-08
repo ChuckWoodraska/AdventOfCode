@@ -13,16 +13,26 @@ for rule in rules:
 
 
 def find_bag(bag_name, searched_bag):
-    return bag_name == searched_bag or any([find_bag(b, searched_bag) for b in bags[bag_name]])
+    return bag_name == searched_bag or any(
+        find_bag(b, searched_bag) for b in bags[bag_name]
+    )
 
 
 # part 1
-print(sum([any([find_bag(b, 'shiny gold') for b in bags[rule]]) for rule in bags]))
+print(sum(any(find_bag(b, 'shiny gold') for b in bags[rule]) for rule in bags))
 
 
 def bag_size(bag_name):
-    return sum([bags[bag_name][b] + bags[bag_name][b] * bag_size(b) for b in bags[bag_name]])
+    return sum(
+        bags[bag_name][b] + bags[bag_name][b] * bag_size(b)
+        for b in bags[bag_name]
+    )
 
 
 # part2
-print(sum([bags['shiny gold'][b] + bags['shiny gold'][b] * bag_size(b) for b in bags['shiny gold']]))
+print(
+    sum(
+        bags['shiny gold'][b] + bags['shiny gold'][b] * bag_size(b)
+        for b in bags['shiny gold']
+    )
+)

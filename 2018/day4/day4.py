@@ -10,7 +10,7 @@ guard_minute_sleep = {}
 def load_log(log):
     for line in log:
         line_search = re.search(r'\[(\d+\-\d+\-\d+\s\d+:\d+)\]\s(Guard #|falls|wakes)(\d*)', line)
-        log_data.append((line_search.group(1), line_search.group(2), line_search.group(3),))
+        log_data.append((line_search[1], line_search[2], line_search[3]))
 
 
 with open('input.txt', 'r') as f:

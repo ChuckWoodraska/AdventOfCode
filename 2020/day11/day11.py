@@ -1,7 +1,7 @@
 import copy
 
 with open('input.txt') as f:
-    lines = [x for x in f.read().splitlines()]
+    lines = list(f.read().splitlines())
 
 print(lines)
 
@@ -11,20 +11,21 @@ adjacent_checks = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0),
 
 new_lines = copy.deepcopy(lines)
 def check_empty(r, c):
-    empty_flag = True
-    for x in adjacent_checks:
-        if len(lines)-1 >= r + x[0] >= 0 and len(lines[0])-1 >= c + x[1] >= 0:
-            if lines[r+x[0]][c+x[1]] == '#':
-                empty_flag = False
-                break
-    return empty_flag
+    return not any(
+        len(lines) - 1 >= r + x[0] >= 0
+        and len(lines[0]) - 1 >= c + x[1] >= 0
+        and lines[r + x[0]][c + x[1]] == '#'
+        for x in adjacent_checks
+    )
 
 def check_crowded(r, c):
-    filled = 0
-    for x in adjacent_checks:
-        if len(lines)-1 >= r + x[0] >= 0 and len(lines[0])-1 >= c + x[1] >= 0:
-            if lines[r+x[0]][c+x[1]] == '#':
-                filled += 1
+    filled = sum(
+        len(lines) - 1 >= r + x[0] >= 0
+        and len(lines[0]) - 1 >= c + x[1] >= 0
+        and lines[r + x[0]][c + x[1]] == '#'
+        for x in adjacent_checks
+    )
+
     return filled >= 4
 
 while True:
@@ -32,16 +33,22 @@ while True:
     for r in range(len(lines)):
         new_row = []
         for c in range(len(lines[0])):
-            if lines[r][c] == 'L':
-                if check_empty(r, c):
-                    new_row.append('#')
-                else:
-                    new_row.append('L')
-            elif lines[r][c] == '#':
-                if check_crowded(r, c):
-                    new_row.append('L')
-                else:
-                    new_row.append('#')
+            if (
+                lines[r][c] == 'L'
+                and check_empty(r, c)
+                or lines[r][c] != 'L'
+                and lines[r][c] == '#'
+                and not check_crowded(r, c)
+            ):
+                new_row.append('#')
+            elif (
+                lines[r][c] == 'L'
+                and not check_empty(r, c)
+                or lines[r][c] != 'L'
+                and lines[r][c] == '#'
+                and check_crowded(r, c)
+            ):
+                new_row.append('L')
             else:
                 new_row.append(lines[r][c])
         new_lines[r] = ''.join(new_row)
@@ -50,4 +57,4 @@ while True:
     lines = copy.deepcopy(new_lines)
 
 print(lines)
-print(sum([x.count('#') for x in lines]))
+print(sum(x.count('#') for x in lines))

@@ -2,49 +2,37 @@ def check_number(num):
     num = str(num)
     dup_check = False
     ascend_check = True
-    for c in range(0, len(num) - 1):
+    for c in range(len(num) - 1):
         if num[c] == num[c + 1]:
             dup_check = True
         elif num[c] > num[c + 1]:
             ascend_check = False
-    if dup_check and ascend_check:
-        return True
-    else:
-        return False
+    return bool(dup_check and ascend_check)
 
 
 def check_number2(num):
     num = str(num)
     dup_check = False
     ascend_check = True
-    for c in range(0, len(num) - 1):
+    for c in range(len(num) - 1):
         if num[c] == num[c + 1] and num.count(num[c]) == 2:
             dup_check = True
         elif num[c] > num[c + 1]:
             ascend_check = False
-    if dup_check and ascend_check:
-        return True
-    else:
-        return False
+    return bool(dup_check and ascend_check)
 
 
 def main():
     with open("input.txt", "r") as f:
-        total = 0
         start, finish = f.read().split("-")
-        for n in range(int(start), int(finish)):
-            if check_number(n):
-                total += 1
+        total = sum(1 for n in range(int(start), int(finish)) if check_number(n))
         print(total)
 
 
 def main2():
     with open("input.txt", "r") as f:
-        total = 0
         start, finish = f.read().split("-")
-        for n in range(int(start), int(finish)):
-            if check_number2(n):
-                total += 1
+        total = sum(1 for n in range(int(start), int(finish)) if check_number2(n))
         print(total)
 
 

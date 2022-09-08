@@ -7,9 +7,9 @@ carts_to_remove = []
 
 
 def find_overwritten_char(c):
-    if c == '>' or c == '<':
+    if c in ['>', '<']:
         return '-'
-    elif c == 'v' or c == '^':
+    elif c in ['v', '^']:
         return '|'
 
 def remove_crashed_carts():
@@ -28,11 +28,11 @@ def remove_crashed_carts():
 
 def remove_crashed_carts2():
     cart_pos = []
-    for index, cart in enumerate(cart_list):
+    for cart in cart_list:
         if cart['overwritten_char'] in ['>', 'v', '<', '^'] and not cart['crashed']:
             cart_pos.append(cart['current_pos'])
             cart['crashed'] = True
-    for index, cart in enumerate(cart_list):
+    for cart in cart_list:
         if cart['overwritten_char'] not in ['>', 'v', '<', '^'] and cart['current_pos'] in cart_pos and not cart['crashed']:
             grid_list[cart['current_pos'][1]][cart['current_pos'][0]] = cart['overwritten_char']
             cart['crashed'] = True
@@ -298,6 +298,6 @@ with open('input.txt', 'r') as f:
         # print(cart_list)
         # print(carts_to_remove)
         remove_crashed_carts2()
-        cart_list = [x for i, x in enumerate(cart_list) if not x['crashed']]
+        cart_list = [x for x in cart_list if not x['crashed']]
     print(cart_list)
-    print([x for i, x in enumerate(cart_list) if not x['crashed']])
+    print([x for x in cart_list if not x['crashed']])

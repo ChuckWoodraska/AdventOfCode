@@ -8,8 +8,8 @@ with open('input.txt', 'r') as f:
     # PART 1
     for line in data:
         line_search = re.search(r'Step ([A-Z]) must be finished before step ([A-Z])', line)
-        node = line_search.group(1)
-        link_node = line_search.group(2)
+        node = line_search[1]
+        link_node = line_search[2]
         graph.add_edge(node, link_node)
     print(''.join(lexicographical_topological_sort(graph)))
 

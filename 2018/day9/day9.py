@@ -29,7 +29,7 @@ def main():
         last_marble = int(last_marble)
         print(play_game(players, last_marble))
         # PART 2
-        last_marble = int(last_marble) * 100
+        last_marble *= 100
         print(play_game(players, last_marble))
 
 

@@ -9,9 +9,9 @@ for l in lines:
     print(l)
     m = re.match('^([\w]+)\[*(\d*)\]*\s=\s(\w+)', l)
     print(m.groups())
-    print(m.group(0))
+    print(m[0])
     # if m.group(1) == "mask":
-    instructions.append([m.group(1), m.group(2), m.group(3)])
+    instructions.append([m[1], m[2], m[3]])
     # elif m.group(1) == "mem":
     #     instructions.append([m.group(1), m.group(2), m.group(3)])
 print(instructions)
@@ -22,12 +22,10 @@ def run_mask(num):
     bin_num = bin(num)[2:].zfill(36)
     new_num = []
     for index, c in enumerate(mask):
-        if c == 'X':
+        if c in ['X', bin_num[index]]:
             new_num.append(bin_num[index])
-        elif c != bin_num[index]:
-            new_num.append(c)
         else:
-            new_num.append(bin_num[index])
+            new_num.append(c)
     print(bin(num)[2:].zfill(36))
     return int(''.join(new_num), 2)
 
